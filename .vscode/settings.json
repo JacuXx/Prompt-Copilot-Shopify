@@ -1,0 +1,95 @@
+{
+    "github.copilot.chat.reviewSelection.instructions": [
+        {
+            "file": "docs/copilot/01-liquid-guidelines.md"
+        },
+        {
+            "file": "docs/copilot/02-sections-snippets.md"
+        },
+        {
+            "file": "docs/copilot/03-javascript-ajax.md"
+        },
+        {
+            "file": "docs/copilot/04-carousels-components.md"
+        },
+        {
+            "file": "docs/copilot/05-customization-styles.md"
+        },
+        {
+            "file": "docs/copilot/06-analysis-development.md"
+        },
+        {
+            "file": "docs/copilot/07-optimal-prompts.md"
+        },
+        {
+            "file": "docs/copilot/08-liquid-patterns.md"
+        },
+        {
+            "file": "docs/copilot/09-performance-optimization.md"
+        },
+        {
+            "file": "docs/copilot/10-schema-templates.md"
+        },
+        {
+            "file": "docs/copilot/11-git-commits-branches.md"
+        },
+        {
+            "file": "docs/copilot/12-editing-existing-components.md"
+        },
+        {
+            "text": "Revisar código siguiendo todas las guías de Shopify Liquid en docs/copilot/. Verificar que se use Liquid para toda la lógica posible, no JavaScript. Confirmar que el código sea completamente personalizable via schema. Validar responsive design para desktop, tablet y mobile. Chequear performance y optimizaciones."
+        }
+    ],
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "file": "docs/copilot/11-git-commits-branches.md"
+        },
+        {
+            "text": "Usar commits semánticos según las guías: estructura tipo(ámbito): descripción. Tipos: ft/feat, fix, estilo/style, pers, refactor, tarea/chore, docs. Ámbito debe ser el archivo, sección o snippet tocado. Ejemplos: ft(product-slider.liquid): agrega estructura de la nueva sección, fix(cart-drawer.js): soluciona error de cálculo en el subtotal"
+        }
+    ],
+    "github.copilot.chat.pullRequestDescriptionGeneration.instructions": [
+        {
+            "file": "docs/copilot/12-editing-existing-components.md"
+        },
+        {
+            "file": "docs/copilot/11-git-commits-branches.md"
+        },
+        {
+            "text": "Describir cambios siguiendo las guías de desarrollo Liquid. Mencionar si es nueva funcionalidad, fix, estilo o personalización. Listar archivos modificados y propósito de cada cambio. Incluir screenshots si hay cambios visuales. Confirmar testing en responsive design."
+        }
+    ],
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": false,
+        "liquid": true,
+        "javascript": true,
+        "css": true,
+        "json": true
+    },
+    "github.copilot.chat.welcomeMessage": "always",
+    "github.copilot.chat.localeOverride": "es",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "files.associations": {
+        "*.liquid": "liquid",
+        "*.scss": "css"
+    },
+    "shopify.theme.check.onSave": true,
+    "liquid.format.enable": true,
+    "[liquid]": {
+        "editor.defaultFormatter": "Shopify.theme-check-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.wordWrap": "on",
+    "explorer.confirmDelete": false,
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "diffEditor.ignoreTrimWhitespace": false
+}
