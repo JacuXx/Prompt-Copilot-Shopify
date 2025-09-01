@@ -1,5 +1,50 @@
 # Guía de Personalización y Estilos
 
+## 🚨 CRÍTICO: Verificación de CSS Antes de Personalizar
+
+### ⚠️ ANTES de implementar cualquier configuración de estilo:
+
+#### 1. **Revisar CSS Existente OBLIGATORIAMENTE**
+```liquid
+{% comment %}
+VERIFICACIÓN CRÍTICA:
+- ¿Existe CSS actual para este elemento en el archivo?
+- ¿Hay estilos en assets/theme.css que afecten este componente?
+- ¿Existen reglas con !important que bloqueen nuevos estilos?
+- ¿Las configuraciones de schema funcionarán con CSS existente?
+{% endcomment %}
+```
+
+#### 2. **Problema Común: Configuraciones que No Funcionan**
+```css
+/* EJEMPLO: Si existe esto en el tema */
+.section-title h2 {
+  font-size: 18px !important;
+  color: #333 !important;
+}
+
+/* Tus configuraciones de schema NO funcionarán */
+.custom-title {
+  font-size: {{ section.settings.title_size }}px; /* Ignorado */
+  color: {{ section.settings.title_color }};     /* Ignorado */
+}
+
+/* SOLUCIÓN: Usar especificidad mayor */
+.custom-section .section-title h2 {
+  font-size: {{ section.settings.title_size }}px !important;
+  color: {{ section.settings.title_color }} !important;
+}
+```
+
+#### 3. **Template de Verificación CSS**
+```
+ANTES de agregar configuraciones de [estilo específico], verificar:
+1. ¿Existen reglas CSS actuales para [selector]?
+2. ¿Hay !important declarations que bloqueen personalizaciones?
+3. ¿El CSS generado tendrá suficiente especificidad?
+4. Si hay conflictos, usar selectores más específicos o !important.
+```
+
 ## Personalización Completa
 
 ### Principio Fundamental
@@ -211,6 +256,71 @@
   ]
 }
 ```
+
+## 🔍 Ejemplo Práctico: Configuración de Tamaño de Texto
+
+### ❌ Problema Común: La Configuración No Funciona
+
+```liquid
+<!-- Schema configurado correctamente -->
+{
+  "type": "select",
+  "id": "title_size",
+  "label": "Tamaño del título",
+  "options": [
+    { "value": "small", "label": "Pequeño" },
+    { "value": "large", "label": "Grande" }
+  ]
+}
+
+<!-- CSS que NO funciona por conflicto existente -->
+<style>
+.custom-title {
+  font-size: {% if section.settings.title_size == 'large' %}32px{% else %}16px{% endif %};
+}
+</style>
+
+<!-- PERO el título sigue igual porque existe esto en el tema: -->
+<!-- En assets/theme.css -->
+.section h2 { font-size: 18px !important; }
+```
+
+### ✅ Solución: Verificar y Sobrescribir CSS Existente
+
+```liquid
+<!-- PASO 1: Verificar CSS existente ANTES de crear configuración -->
+{% comment %}
+VERIFICACIÓN REALIZADA:
+- Encontrado en theme.css: .section h2 { font-size: 18px !important; }
+- Necesito usar especificidad mayor para sobrescribir
+{% endcomment %}
+
+<!-- PASO 2: CSS con especificidad adecuada -->
+<style>
+.custom-section .custom-title {
+  font-size: {% if section.settings.title_size == 'large' %}32px{% else %}16px{% endif %} !important;
+}
+
+/* O usar selector aún más específico */
+#shopify-section-{{ section.id }} .custom-title {
+  font-size: {% if section.settings.title_size == 'large' %}32px{% else %}16px{% endif %} !important;
+}
+</style>
+```
+
+### 📋 Checklist para Configuraciones de Estilo
+
+#### Antes de Crear la Configuración
+- [ ] Busqué estilos existentes para este elemento en el archivo actual
+- [ ] Revisé assets/theme.css para reglas que afecten este elemento
+- [ ] Identifiqué si hay `!important` declarations existentes
+- [ ] Verifiqué la especificidad necesaria para sobrescribir
+
+#### Al Implementar la Configuración
+- [ ] Uso selectores con especificidad suficiente
+- [ ] Agrego `!important` cuando sea necesario para conflictos
+- [ ] Pruebo que la configuración realmente cambie el elemento
+- [ ] Verifico que funcione en responsive (mobile, tablet, desktop)
 
 ### CSS Responsivo Completo
 

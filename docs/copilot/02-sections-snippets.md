@@ -50,6 +50,43 @@
 }
 ```
 
+## ⚠️ IMPORTANTE: Verificación de CSS Existente
+
+### Antes de Editar Snippets o Secciones
+Siempre revisar si ya existen estilos CSS que puedan interferir:
+
+#### 1. **En el Archivo Actual**
+- Buscar `<style>` tags existentes
+- Identificar clases CSS ya definidas
+- Verificar si hay reglas que afecten el elemento a modificar
+
+#### 2. **En Assets del Tema**
+- **theme.css**: Estilos globales
+- **section-*.css**: Estilos específicos de sección
+- **component-*.css**: Estilos de componentes
+
+#### 3. **Ejemplo de Conflicto Común**
+```css
+/* Si existe en el tema */
+.product-title { font-size: 16px !important; }
+
+/* Nuevo CSS para configuración de tamaño */
+.custom-product-title { font-size: 24px; } /* No funcionará */
+
+/* SOLUCIÓN */
+.product-card .custom-product-title { 
+  font-size: 24px !important; 
+}
+```
+
+#### 4. **Prompt Template con Verificación CSS**
+```
+Edita [archivo] para agregar [funcionalidad]. ANTES de agregar CSS nuevo, 
+revisa si existen estilos para [elemento específico] en este archivo o en 
+assets que puedan interferir. Si hay conflictos, usa especificidad adecuada 
+o !important para sobrescribir.
+```
+
 ## Organización de Archivos
 
 ### Estructura Recomendada

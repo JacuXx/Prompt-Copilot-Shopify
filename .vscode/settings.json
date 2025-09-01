@@ -37,7 +37,16 @@
             "file": "docs/copilot/12-editing-existing-components.md"
         },
         {
-            "text": "Revisar código siguiendo todas las guías de Shopify Liquid en docs/copilot/. Verificar que se use Liquid para toda la lógica posible, no JavaScript. Confirmar que el código sea completamente personalizable via schema. Validar responsive design para desktop, tablet y mobile. Chequear performance y optimizaciones."
+            "file": "docs/copilot/13-seo-accessibility.md"
+        },
+        {
+            "file": "docs/copilot/14-section-recommendations.md"
+        },
+        {
+            "file": "docs/copilot/15-metafields-guide.md"
+        },
+        {
+            "text": "Revisar código siguiendo todas las guías de Shopify Liquid en docs/copilot/. Verificar que se use Liquid para toda la lógica posible, no JavaScript. Confirmar que el código sea completamente personalizable via schema. Validar responsive design para desktop, tablet y mobile. Chequear performance y optimizaciones. IMPORTANTE: Si se solicita análisis de imagen o recomendación de sección, usar la guía de 14-section-recommendations.md para proporcionar sugerencias precisas y fundamentadas. Para metafields, seguir la guía 15-metafields-guide.md asegurando el acceso correcto con product: product en snippets."
         }
     ],
     "github.copilot.chat.commitMessageGeneration.instructions": [
@@ -54,6 +63,9 @@
         },
         {
             "file": "docs/copilot/11-git-commits-branches.md"
+        },
+        {
+            "file": "docs/copilot/13-seo-accessibility.md"
         },
         {
             "text": "Describir cambios siguiendo las guías de desarrollo Liquid. Mencionar si es nueva funcionalidad, fix, estilo o personalización. Listar archivos modificados y propósito de cada cambio. Incluir screenshots si hay cambios visuales. Confirmar testing en responsive design."

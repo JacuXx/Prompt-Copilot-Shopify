@@ -1,5 +1,53 @@
 # Patrones y Antipatrones de Liquid
 
+## 🚨 IMPORTANTE: CSS y Configuraciones Dinámicas
+
+### ⚠️ Patrón Crítico: Verificar CSS Antes de Implementar Configuraciones
+
+#### ✅ Correcto: Verificación de CSS Existente
+```liquid
+{% comment %}
+VERIFICACIÓN OBLIGATORIA ANTES DE IMPLEMENTAR:
+1. ¿Existe CSS para .product-title en este archivo?
+2. ¿Hay reglas en theme.css que afecten títulos de producto?
+3. ¿Existen !important declarations?
+4. ¿Mi CSS dinámico tendrá suficiente especificidad?
+{% endcomment %}
+
+{% assign title_size_class = 'title-' | append: section.settings.title_size %}
+
+<h2 class="product-title {{ title_size_class }}" 
+    style="color: {{ section.settings.title_color }};">
+  {{ product.title }}
+</h2>
+
+<style>
+/* Verificado: existe .product-title { font-size: 16px !important; } en theme.css */
+/* Solución: usar especificidad mayor */
+.custom-product .product-title.title-small {
+  font-size: 14px !important;
+}
+.custom-product .product-title.title-large {
+  font-size: 24px !important;
+}
+</style>
+```
+
+#### ❌ Incorrecto: Sin Verificar CSS Existente
+```liquid
+<!-- Configuración que NO funcionará -->
+<h2 class="product-title" style="font-size: {{ section.settings.title_size }}px;">
+  {{ product.title }}
+</h2>
+
+<!-- Este CSS será ignorado si existe .product-title { font-size: 16px !important; } -->
+<style>
+.product-title {
+  font-size: {{ section.settings.title_size }}px; /* No se aplicará */
+}
+</style>
+```
+
 ## 🎯 Patrones Recomendados (DO)
 
 ### 1. Asignación de Variables Complejas

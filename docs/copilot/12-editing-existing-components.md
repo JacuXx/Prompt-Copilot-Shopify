@@ -19,6 +19,11 @@ ANÁLISIS REQUERIDO ANTES DE EDITAR:
 #### 2. **Identificar Componentes Existentes**
 - **Variables Liquid**: `{% assign %}` y configuraciones actuales
 - **Estructura HTML**: Clases CSS y data attributes usados
+- **CSS Existente**: 
+  - Revisar estilos actuales en `<style>` tags del archivo
+  - Verificar clases CSS que puedan estar en archivos assets (theme.css, section-*.css)
+  - Identificar custom properties (CSS variables) ya definidas
+  - Mapear media queries y responsive breakpoints existentes
 - **JavaScript**: Funciones y event listeners existentes
 - **Schema**: Settings y blocks ya configurados
 - **Snippets relacionados**: `{% render %}` calls existentes
@@ -28,6 +33,108 @@ ANÁLISIS REQUERIDO ANTES DE EDITAR:
 - **Estructura**: Respetar organización actual del código
 - **Estilos**: Mantener metodología CSS establecida
 - **Funcionalidad**: Preservar comportamientos existentes
+
+## 🎨 CRÍTICO: Revisión de CSS Existente
+
+### ⚠️ ANTES de agregar cualquier estilo nuevo:
+
+#### 1. **Verificar CSS en el Archivo Actual**
+```liquid
+{% comment %}
+REVISAR OBLIGATORIAMENTE:
+- Buscar <style> tags existentes en el archivo
+- Identificar clases CSS ya definidas
+- Verificar custom properties (--variables) existentes
+- Mapear selectores que puedan afectar nuevos elementos
+{% endcomment %}
+```
+
+#### 2. **Verificar CSS en Assets del Tema**
+- **theme.css** o **base.css**: Estilos globales del tema
+- **section-[nombre].css**: Estilos específicos de la sección
+- **component-[nombre].css**: Estilos de componentes reutilizables
+- **custom.css**: Estilos personalizados del tema
+
+#### 3. **Identificar Conflictos Potenciales**
+```css
+/* EJEMPLO: Si existe esto en el CSS actual */
+.product-card h3 {
+  font-size: 16px !important;
+  color: #333;
+}
+
+/* Tu nuevo CSS podría no funcionar */
+.product-card__title {
+  font-size: 24px; /* No se aplicará por el !important */
+  color: #000;
+}
+
+/* SOLUCIÓN: Usar especificidad mayor o sobrescribir */
+.product-card .product-card__title {
+  font-size: 24px !important;
+  color: #000 !important;
+}
+```
+
+#### 4. **Casos Comunes de Conflictos**
+
+##### ❌ Problema: Tamaños de Texto no se Aplican
+```css
+/* Existe en el tema */
+.section-header h2 { font-size: 18px !important; }
+
+/* Tu configuración no funciona */
+.custom-section h2 { font-size: 32px; }
+```
+
+##### ✅ Solución: Especificidad Correcta
+```css
+/* Usar selector más específico */
+.custom-section .section-header h2 {
+  font-size: 32px !important;
+}
+```
+
+##### ❌ Problema: Colores no se Cambian
+```css
+/* CSS del tema con alta especificidad */
+body .product-grid .product-item .price { color: #666; }
+
+/* Tu estilo no se aplica */
+.price { color: #ff0000; }
+```
+
+##### ✅ Solución: Especificidad Igual o Mayor
+```css
+.product-grid .product-item .price {
+  color: #ff0000 !important;
+}
+```
+
+#### 5. **Prompt Template para Revisión CSS**
+```
+ANTES de agregar estilos para [configuración específica], revisa:
+1. ¿Existen estilos CSS actuales en este archivo que afecten [elemento]?
+2. ¿Hay reglas en assets/theme.css para [selector específico]?
+3. ¿Existen !important declarations que puedan bloquear nuevos estilos?
+4. Si encuentra conflictos, usa especificidad adecuada o !important para sobrescribir.
+```
+
+### 📋 Checklist de CSS Existente
+
+#### Antes de Agregar Estilos
+- [ ] Busqué `<style>` tags en el archivo actual
+- [ ] Revisé si existen clases CSS similares ya definidas
+- [ ] Verifiqué assets del tema que puedan tener estilos relacionados
+- [ ] Identifiqué selectores con `!important` que puedan interferir
+- [ ] Comprobé custom properties (CSS variables) existentes
+
+#### Al Escribir Nuevos Estilos
+- [ ] Uso especificidad adecuada para sobrescribir estilos existentes
+- [ ] Agrego `!important` cuando sea necesario para conflictos
+- [ ] Mantengo nomenclatura consistente con estilos actuales
+- [ ] Preservo responsive design de estilos existentes
+- [ ] Documento por qué uso `!important` si es necesario
 
 ## 📝 Prompts Optimizados para Edición
 
@@ -46,7 +153,16 @@ Edita [ARCHIVO EXISTENTE] para [MODIFICACIÓN ESPECÍFICA], manteniendo:
 ```
 Edita la sección [nombre-seccion.liquid] para agregar [nueva funcionalidad], 
 mantén toda la estructura actual, variables existentes y agrega solo lo necesario 
-para [funcionalidad específica]
+para [funcionalidad específica]. IMPORTANTE: Revisa si ya existen estilos CSS 
+para esta funcionalidad en el archivo o en assets que puedan interferir.
+```
+
+#### Para Modificar Estilos Existentes
+```
+Antes de agregar nuevos estilos CSS para [elemento específico], revisa si ya 
+existen reglas CSS en este archivo o en assets/theme.css que puedan estar 
+afectando [elemento]. Modifica o sobrescribe solo lo necesario para evitar 
+conflictos de estilos.
 ```
 
 **Ejemplos:**

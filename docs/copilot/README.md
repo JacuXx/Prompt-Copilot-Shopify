@@ -84,6 +84,20 @@ Esta documentación proporciona guías específicas para que GitHub Copilot gene
     - Settings optimizados para Shopify
     - Comandos de activación y uso
 
+14. **[14-section-recommendations.md](./14-section-recommendations.md)**
+    - 🆕 **Análisis inteligente de imágenes/descripciones**
+    - **Recomendaciones automáticas de secciones**
+    - **Matriz de tipos de contenido vs secciones**
+    - **Prompts optimizados para análisis visual**
+    - **Templates para casos complejos**
+
+15. **[15-metafields-guide.md](./15-metafields-guide.md)**
+    - 🆕 **Guía completa de Metafields en Shopify**
+    - **Acceso correcto dentro y fuera del contexto del objeto**
+    - **Uso de `product: product` en snippets**
+    - **Tipos de metafields y validaciones**
+    - **Patrones de uso avanzados y mejores prácticas**
+
 ## 🎯 Objetivos Principales
 
 ### Prioridades de Desarrollo

@@ -46,8 +46,17 @@ La configuración de Copilot ya está optimizada en `.vscode/settings.json` con:
 10. **10-testing-debugging.md** - Testing y debugging
 11. **11-deployment.md** - Despliegue y configuración
 12. **12-schema-optimization.md** - Optimización de schemas
+13. **13-seo-accessibility.md** - ✨ **SEO y Accesibilidad** (NUEVO)
 
 ## 🔧 Snippets de Código
+
+### Snippets SEO-Optimizados (`.vscode/shopify-seo.code-snippets`) ✨ **NUEVO**
+- `shopify-section` - Template SEO-optimizado para nueva sección (H2 para títulos)
+- `shopify-products-seo` - Grid de productos con títulos H3 correctos
+- `shopify-snippet` - Template para snippet con estructura SEO
+- `schema-richtext` - Setting richtext para HTML editable
+- `seo-emphasis` - Uso correcto de énfasis de texto
+- `css-responsive-seo` - CSS responsive con clases accesibles
 
 ### Snippets Básicos (`.vscode/shopify.code-snippets`)
 - `shopify-section` - Template completo para nueva sección
@@ -78,17 +87,20 @@ La configuración de Copilot ya está optimizada en `.vscode/settings.json` con:
 El sistema está configurado para responder a estos tipos de prompts:
 
 ```
-// Crear nueva sección
-"Crear sección de testimonios con slider responsive"
+// Crear nueva sección con SEO correcto
+"Crear sección de testimonios con títulos H2 y productos H3"
 
-// Optimizar rendimiento
-"Revisar este código para mejorar performance"
+// Optimizar para SEO y accesibilidad
+"Revisar este código siguiendo reglas de SEO y accesibilidad"
 
 // Generar commit
 "Generar commit para estos cambios"
 
-// Crear snippet
-"Crear snippet para mostrar precio con descuento"
+// Crear snippet con estructura semántica
+"Crear snippet para mostrar precio con semántica correcta"
+
+// Validar jerarquía de encabezados
+"Verificar que esta sección cumple las reglas de SEO"
 ```
 
 ### Generación Automática
@@ -103,22 +115,26 @@ El sistema está configurado para responder a estos tipos de prompts:
 # 1. Crear rama para feature
 git checkout -b feat/nueva-funcionalidad
 
-# 2. Usar snippet para crear base
-# Tipo: shopify-section
+# 2. Usar snippet SEO-optimizado
+# Tipo: shopify-section (ahora incluye estructura H2/H3 correcta)
 
 # 3. Desarrollar con ayuda de Copilot
-# Usar prompts específicos de las guías
+# Usar prompts: "Crear sección siguiendo reglas de SEO"
 
 # 4. Generar commit automático
 # Copilot generará el mensaje siguiendo convenciones
 ```
 
-### 2. Optimización
+### 2. Validación SEO
 ```bash
-# 1. Seleccionar código a optimizar
-# 2. Usar prompt: "Optimizar este código siguiendo las guías de performance"
-# 3. Revisar sugerencias de Copilot
-# 4. Aplicar cambios
+# 1. Verificar jerarquía de encabezados
+# Prompt: "Revisar títulos H2/H3 en esta sección"
+
+# 2. Validar textos editables
+# Confirmar que se usan richtext/textarea
+
+# 3. Comprobar accesibilidad
+# Verificar alt text, contraste, navegación por teclado
 ```
 
 ### 3. Testing
