@@ -105,6 +105,13 @@ Esta documentación proporciona guías específicas para que GitHub Copilot gene
     - **✅ Dónde y cómo comentar correctamente**
     - **Estrategias de documentación y patrones recomendados**
 
+17. **[17-direct-responses.md](./17-direct-responses.md)**
+    - 🆕 **Guía para respuestas directas de código**
+    - **❌ NO generar markdown cuando se pide código**
+    - **✅ Responder con código directo y funcional**
+    - **Verbos de acción = código, verbos de explicación = documentación**
+    - **Principio "Código Primero" para eficiencia**
+
 ## 🎯 Objetivos Principales
 
 ### Prioridades de Desarrollo

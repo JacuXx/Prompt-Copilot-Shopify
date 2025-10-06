@@ -63,23 +63,24 @@ VERIFICACIÓN OBLIGATORIA ANTES DE IMPLEMENTAR:
 {% endunless %}
 ```
 
-#### ✅ Correcto: Comentarios Útiles y Profesionales
+#### ✅ Correcto: Código Autoexplicativo con Comentarios Mínimos
 ```liquid
-{% comment %} Inicializar cálculo de descuentos automáticos {% endcomment %}
+{% comment %} Política de negocio: descuentos automáticos solo para usuarios registrados {% endcomment %}
 {% liquid
-  assign total = 0
-  assign discount = 0
+  assign cart_total_amount = 0
+  assign automatic_discount_amount = 0
 %}
 
-{% comment %} Fallback a producto de configuración si no hay contexto {% endcomment %}
-{% unless product %}
-  {% assign product = section.settings.product %}
+{% comment %} Fallback requerido por configuración de tema {% endcomment %}
+{% unless featured_product %}
+  {% assign featured_product = section.settings.product %}
 {% endunless %}
 
-{% comment %} NO comentar código obvio {% endcomment %}
+{% comment %} Código autoexplicativo - NO necesita comentarios {% endcomment %}
 {% liquid
-  assign product_title = product.title
-  assign product_price = product.price
+  assign product_title = featured_product.title
+  assign product_current_price = featured_product.price | money
+  assign product_original_price = featured_product.compare_at_price | money
 %}
 ```
 

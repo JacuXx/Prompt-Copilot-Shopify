@@ -50,6 +50,12 @@ Implementa [FUNCIÓN AJAX] que [ACCIÓN], analiza el tema actual, optimizado, co
 - `qué sección necesito para` - Orientación basada en funcionalidad
 - `evalúa y recomienda estructura` - Análisis completo con alternativas
 
+#### Para Respuestas Directas de Código
+- `crea una sección` - Genera código Liquid directo, no documentación
+- `genera un snippet` - Responde con código funcional inmediatamente
+- `implementa una función` - Código JavaScript/Liquid directo
+- `desarrolla un componente` - Código completo sin explicaciones extras
+
 #### Para Optimización
 - `completamente personalizable` - Genera schema completo
 - `responsive` - Incluye media queries para todos los dispositivos
@@ -81,6 +87,20 @@ PROMPTS PARA ANÁLISIS INTELIGENTE:
 • "Evalúa este mockup y sugiere estructura de bloques, schema settings y consideraciones responsive"
 • "Revisa esta funcionalidad y recomienda si usar sección única o dividir en componentes modulares"
 • "Analiza el propósito de este elemento y sugiere ubicación óptima en la página con priorización"
+{% endcomment %}
+```
+
+#### ⚡ **NUEVO: Respuestas Directas de Código**
+```liquid
+{% comment %}
+PROMPTS PARA CÓDIGO DIRECTO (SIN DOCUMENTACIÓN MARKDOWN):
+
+• "Crea una sección de testimonios con carrusel responsive"
+• "Genera un snippet para mostrar badges de productos en oferta"
+• "Implementa un formulario de contacto con validación AJAX"
+• "Desarrolla un componente de búsqueda predictiva en JavaScript"
+• "Construye un carrusel de productos relacionados con lazy loading"
+• "Programa una función de añadir múltiples productos al carrito"
 {% endcomment %}
 ```
 

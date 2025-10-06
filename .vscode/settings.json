@@ -49,7 +49,10 @@
             "file": "docs/copilot/16-liquid-comments-rules.md"
         },
         {
-            "text": "Revisar código siguiendo todas las guías de Shopify Liquid en docs/copilot/. Verificar que se use Liquid para toda la lógica posible, no JavaScript. Confirmar que el código sea completamente personalizable via schema. Validar responsive design para desktop, tablet y mobile. Chequear performance y optimizaciones. IMPORTANTE: Si se solicita análisis de imagen o recomendación de sección, usar la guía de 14-section-recommendations.md para proporcionar sugerencias precisas y fundamentadas. Para metafields, seguir la guía 15-metafields-guide.md asegurando el acceso correcto con product: product en snippets. CRÍTICO: NUNCA usar comentarios {% comment %} dentro de tags {% liquid %} o {% %}. Usar comentarios SOLO cuando sean útiles (lógica compleja, dependencias, por qué no qué), SIN emojis, limpios y profesionales - ver 16-liquid-comments-rules.md."
+            "file": "docs/copilot/17-direct-responses.md"
+        },
+        {
+            "text": "Revisar código siguiendo todas las guías de Shopify Liquid en docs/copilot/. Verificar que se use Liquid para toda la lógica posible, no JavaScript. Confirmar que el código sea completamente personalizable via schema. Validar responsive design para desktop, tablet y mobile. Chequear performance y optimizaciones. IMPORTANTE: Si se solicita análisis de imagen o recomendación de sección, usar la guía de 14-section-recommendations.md para proporcionar sugerencias precisas y fundamentadas. Para metafields, seguir la guía 15-metafields-guide.md asegurando el acceso correcto con product: product en snippets. CRÍTICO: NUNCA usar comentarios {% comment %} dentro de tags {% liquid %} o {% %}. PRINCIPIO FUNDAMENTAL: El código debe explicarse por sí solo con nombres descriptivos y estructura clara. Comentarios MÍNIMOS y solo cuando aporten valor real a otros desarrolladores - NO explicar QUÉ hace el código, SÍ explicar POR QUÉ se hace. RESPUESTAS: Cuando se pida crear/generar/implementar código, responder DIRECTAMENTE con código funcional autoexplicativo, NO con documentación markdown - ver guías 16 y 17."
         }
     ],
     "github.copilot.chat.commitMessageGeneration.instructions": [
