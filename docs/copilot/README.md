@@ -98,6 +98,13 @@ Esta documentación proporciona guías específicas para que GitHub Copilot gene
     - **Tipos de metafields y validaciones**
     - **Patrones de uso avanzados y mejores prácticas**
 
+16. **[16-liquid-comments-rules.md](./16-liquid-comments-rules.md)**
+    - 🆕 **Reglas CRÍTICAS para comentarios en Liquid**
+    - **❌ NUNCA comentar dentro de `{% liquid %}` tags**
+    - **❌ NUNCA comentar dentro de `{% %}` individuales**
+    - **✅ Dónde y cómo comentar correctamente**
+    - **Estrategias de documentación y patrones recomendados**
+
 ## 🎯 Objetivos Principales
 
 ### Prioridades de Desarrollo

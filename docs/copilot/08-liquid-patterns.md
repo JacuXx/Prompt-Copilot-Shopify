@@ -48,6 +48,35 @@ VERIFICACIÓN OBLIGATORIA ANTES DE IMPLEMENTAR:
 </style>
 ```
 
+### 🚫 **CRÍTICO: Reglas de Comentarios**
+
+#### ❌ Incorrecto: Comentarios Dentro de Tags
+```liquid
+{% liquid
+  {% comment %} Esto ROMPE el código {% endcomment %}
+  assign total = 0
+%}
+
+{% unless product %}
+  {% comment %} Esto TAMBIÉN rompe {% endcomment %}
+  {% assign product = section.settings.product %}
+{% endunless %}
+```
+
+#### ✅ Correcto: Comentarios Externos
+```liquid
+{% comment %} Inicializar variables de cálculo {% endcomment %}
+{% liquid
+  assign total = 0
+  assign discount = 0
+%}
+
+{% comment %} Validar producto disponible {% endcomment %}
+{% unless product %}
+  {% assign product = section.settings.product %}
+{% endunless %}
+```
+
 ## 🎯 Patrones Recomendados (DO)
 
 ### 1. Asignación de Variables Complejas
