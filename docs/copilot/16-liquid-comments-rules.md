@@ -129,16 +129,15 @@
 %}
 ```
 
-### 2. **Comentarios Sección por Sección**
+### 2. **Comentarios Útiles y Específicos**
 ```liquid
-{% comment %} === CONFIGURACIÓN INICIAL === {% endcomment %}
+{% comment %} Configuración inicial de sección {% endcomment %}
 {% liquid
   assign show_vendor = section.settings.show_vendor
   assign show_type = section.settings.show_type
   assign image_ratio = section.settings.image_ratio
 %}
 
-{% comment %} === VALIDACIÓN DE PRODUCTO === {% endcomment %}
 {% liquid
   unless product
     assign product = all_products[section.settings.product_handle]
@@ -149,7 +148,7 @@
   endif
 %}
 
-{% comment %} === CÁLCULOS DE PRECIO === {% endcomment %}
+{% comment %} Cálculo de descuento y porcentaje de ahorro {% endcomment %}
 {% liquid
   assign has_discount = false
   if product.compare_at_price > product.price
@@ -160,29 +159,23 @@
 %}
 ```
 
-### 3. **Documentación de Parámetros**
+### 3. **Documentación Limpia de Snippets**
 ```liquid
 {% comment %}
-  SNIPPET: Product Card Enhanced
+  Product Card Enhanced
   
-  PARÁMETROS REQUERIDOS:
-  - product: Objeto producto de Shopify
-  - card_style: string ('default', 'minimal', 'detailed')
+  Parámetros:
+  - product (requerido)
+  - card_style: 'default', 'minimal', 'detailed'
+  - show_vendor: boolean, default false
+  - show_description: boolean, default true
   
-  PARÁMETROS OPCIONALES:
-  - show_vendor: boolean (default: false)
-  - show_description: boolean (default: true)
-  - image_ratio: string ('square', 'portrait', 'landscape')
-  
-  METAFIELDS UTILIZADOS:
-  - product.metafields.custom.material
-  - product.metafields.custom.care_instructions
+  Usa metafields: custom.material, custom.care_instructions
 {% endcomment %}
 {% liquid
   assign card_style = card_style | default: 'default'
   assign show_vendor = show_vendor | default: false
   assign show_description = show_description | default: true
-  assign image_ratio = image_ratio | default: 'square'
 %}
 ```
 
@@ -244,24 +237,20 @@
 
 ## 🎨 **Patrones Recomendados**
 
-### 1. **Estructura de Comentarios por Secciones**
+### 1. **Estructura Limpia de Comentarios**
 ```liquid
 {% comment %}
-===========================================
-SECCIÓN: Hero Product Banner
-PROPÓSITO: Mostrar producto destacado con información completa
-ACTUALIZADO: {{ 'now' | date: '%Y-%m-%d' }}
-===========================================
+  Hero Product Banner
+  Muestra producto destacado con información completa
 {% endcomment %}
 
-{% comment %} --- CONFIGURACIÓN INICIAL --- {% endcomment %}
 {% liquid
   assign featured_product = all_products[section.settings.product]
   assign layout = section.settings.layout
   assign show_price = section.settings.show_price
 %}
 
-{% comment %} --- VALIDACIONES --- {% endcomment %}
+{% comment %} Validación y fallback de producto {% endcomment %}
 {% liquid
   if featured_product == blank
     assign featured_product = collections.all.products.first
@@ -272,7 +261,6 @@ ACTUALIZADO: {{ 'now' | date: '%Y-%m-%d' }}
   endunless
 %}
 
-{% comment %} --- CÁLCULOS DE DATOS --- {% endcomment %}
 {% liquid
   assign product_images = featured_product.images
   assign first_variant = featured_product.selected_or_first_available_variant
@@ -312,28 +300,19 @@ ACTUALIZADO: {{ 'now' | date: '%Y-%m-%d' }}
 ### 3. **Documentación de Snippets**
 ```liquid
 {% comment %}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SNIPPET: product-price-display.liquid
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PROPÓSITO:
-Muestra el precio del producto con diferentes formatos y estilos
-
-PARÁMETROS:
-├── product (requerido): Objeto producto de Shopify
-├── variant (opcional): Variante específica, por defecto usa la primera disponible
-├── show_compare_price (opcional): Boolean, mostrar precio comparativo
-├── show_unit_price (opcional): Boolean, mostrar precio por unidad
-├── price_class (opcional): Clase CSS adicional para el precio
-└── currency_format (opcional): 'symbol' o 'code', formato de moneda
-
-SALIDA:
-HTML con estructura de precios formateada y responsive
-
-DEPENDENCIAS:
-- Filtros de Shopify: money, money_with_currency
-- CSS classes: .price, .price--compare, .price--unit
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SNIPPET: product-price-display.liquid
+  
+  PARÁMETROS:
+  - product (requerido): Objeto producto de Shopify
+  - variant (opcional): Variante específica
+  - show_compare_price (opcional): Boolean, mostrar precio comparativo
+  - show_unit_price (opcional): Boolean, mostrar precio por unidad
+  - price_class (opcional): Clase CSS adicional
+  - currency_format (opcional): 'symbol' o 'code'
+  
+  DEPENDENCIAS:
+  - Filtros: money, money_with_currency
+  - CSS: .price, .price--compare, .price--unit
 {% endcomment %}
 
 {% comment %} Parámetros con valores por defecto {% endcomment %}
@@ -346,14 +325,20 @@ DEPENDENCIAS:
 %}
 ```
 
-## 📋 **Checklist de Comentarios**
+## **Reglas para Comentarios Útiles**
 
-### Antes de Escribir Comentarios
-- [ ] ¿Estoy dentro de un tag `{% liquid %}`? → NO comentar
-- [ ] ¿Estoy dentro de `{% %}` individuales? → NO comentar
-- [ ] ¿Es lógica compleja que necesita explicación? → SÍ comentar
-- [ ] ¿Es un snippet que otros van a usar? → Documentar parámetros
-- [ ] ¿Uso metafields o lógica específica? → Documentar dependencias
+### NUNCA comentar:
+- Código obvio o autoexplicativo
+- Cada línea de código
+- Lo que hace el código (es evidente)
+- Dentro de tags `{% liquid %}` o `{% %}`
+
+### SÍ comentar cuando:
+- La lógica es compleja o no obvia
+- Se usan metafields específicos
+- Es un snippet que otros usarán (documentar parámetros)
+- Hay lógica de negocio específica
+- Se necesita explicar el "por qué", no el "qué"
 
 ### Al Escribir el Código
 - [ ] Comentarios ANTES de bloques `{% liquid %}`
@@ -369,37 +354,66 @@ DEPENDENCIAS:
 - [ ] Ejemplos de uso cuando sea complejo
 - [ ] Fecha de última actualización
 
-## 🚀 **Mejores Prácticas**
+## **Principios de Comentarios Profesionales**
 
-### 1. **Jerarquía de Comentarios**
+### Comentarios Útiles vs Inútiles
+
+#### ❌ Comentarios Inútiles
 ```liquid
-{% comment %} 
-═══════════════════════════════════════
-NIVEL 1: Sección Principal
-═══════════════════════════════════════
-{% endcomment %}
+{% comment %} Asignar producto {% endcomment %}
+{% assign product = section.settings.product %}
 
-{% comment %} --- NIVEL 2: Subsección --- {% endcomment %}
+{% comment %} Mostrar título del producto {% endcomment %}
+<h2>{{ product.title }}</h2>
 
-{% comment %} NIVEL 3: Funcionalidad específica {% endcomment %}
+{% comment %} Precio del producto {% endcomment %}
+<p>{{ product.price | money }}</p>
 ```
 
-### 2. **Comentarios Condicionales**
+#### ✅ Comentarios Útiles
 ```liquid
-{% comment %} 
-  TODO: Agregar soporte para múltiples monedas
-  FIXME: El cálculo de descuento no funciona con productos en oferta
-  NOTE: Esta lógica depende del metafield custom.special_price
-{% endcomment %}
+{% comment %} Fallback a primer producto si no hay selección {% endcomment %}
+{% unless product %}
+  {% assign product = collections.all.products.first %}
+{% endunless %}
+
+{% comment %} Cálculo de descuento con validación de precio comparativo {% endcomment %}
+{% liquid
+  if product.compare_at_price > product.price
+    assign discount_percentage = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | round
+  endif
+%}
+
+{% comment %} Requiere metafield custom.shipping_info para mostrar información {% endcomment %}
+{% if product.metafields.custom.shipping_info %}
+  <p>{{ product.metafields.custom.shipping_info }}</p>
+{% endif %}
 ```
 
-### 3. **Versionado en Comentarios**
+### Reglas de Oro
+1. **No expliques QUÉ hace el código** (es obvio al leerlo)
+2. **Explica POR QUÉ lo haces** (lógica de negocio)
+3. **Documenta dependencias** (metafields, configuraciones especiales)
+4. **Marca TODOs y FIXMEs** cuando sea necesario
+5. **Mantén comentarios actualizados** con el código
+
+## **Mejores Prácticas**
+
+### 1. **Comentarios Claros y Directos**
+```liquid
+{% comment %} Sección Principal {% endcomment %}
+
+{% comment %} Subsección específica {% endcomment %}
+
+{% comment %} Funcionalidad específica cuando sea necesario {% endcomment %}
+```
+
+### 2. **Comentarios de Desarrollo**
 ```liquid
 {% comment %}
-  CHANGELOG:
-  v1.0 - Implementación inicial
-  v1.1 - Agregado soporte para variantes múltiples
-  v1.2 - Corregido bug con precios en diferentes monedas
-  v2.0 - Refactorizado para usar metafields
+  TODO: Soporte para múltiples monedas
+  FIXME: Cálculo de descuento con productos en oferta
+  REQUIERE: metafield custom.special_price
 {% endcomment %}
 ```
+

@@ -63,18 +63,24 @@ VERIFICACIÓN OBLIGATORIA ANTES DE IMPLEMENTAR:
 {% endunless %}
 ```
 
-#### ✅ Correcto: Comentarios Externos
+#### ✅ Correcto: Comentarios Útiles y Profesionales
 ```liquid
-{% comment %} Inicializar variables de cálculo {% endcomment %}
+{% comment %} Inicializar cálculo de descuentos automáticos {% endcomment %}
 {% liquid
   assign total = 0
   assign discount = 0
 %}
 
-{% comment %} Validar producto disponible {% endcomment %}
+{% comment %} Fallback a producto de configuración si no hay contexto {% endcomment %}
 {% unless product %}
   {% assign product = section.settings.product %}
 {% endunless %}
+
+{% comment %} NO comentar código obvio {% endcomment %}
+{% liquid
+  assign product_title = product.title
+  assign product_price = product.price
+%}
 ```
 
 ## 🎯 Patrones Recomendados (DO)
