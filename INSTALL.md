@@ -14,6 +14,46 @@ Ejecuta directamente con `npx` desde cualquier proyecto Shopify:
 npx github:JacuXx/Prompt-Copilot-Shopify
 ```
 
+#### Para repositorios privados:
+
+Si el repositorio es privado, necesitas configurar un token de GitHub:
+
+1. **Crear un token de GitHub:**
+   - Ve a https://github.com/settings/tokens
+   - Click en "Generate new token" → "Generate new token (classic)"
+   - Dale un nombre: "Shopify Copilot Sync"
+   - Selecciona el scope: `repo` (Full control of private repositories)
+   - Click en "Generate token"
+   - **Copia el token** (solo se muestra una vez)
+
+2. **Configurar el token:**
+
+   **En Windows (PowerShell):**
+   ```powershell
+   # Configurar para la sesión actual
+   $env:GITHUB_TOKEN = "ghp_tu_token_aqui"
+   
+   # Configurar permanentemente
+   [System.Environment]::SetEnvironmentVariable('GITHUB_TOKEN', 'ghp_tu_token_aqui', 'User')
+   ```
+
+   **En Mac/Linux (Bash/Zsh):**
+   ```bash
+   # Configurar para la sesión actual
+   export GITHUB_TOKEN="ghp_tu_token_aqui"
+   
+   # Configurar permanentemente (agregar a ~/.bashrc o ~/.zshrc)
+   echo 'export GITHUB_TOKEN="ghp_tu_token_aqui"' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
+3. **Usar el comando:**
+   ```bash
+   npx github:JacuXx/Prompt-Copilot-Shopify
+   ```
+
+   Ahora el comando usará el token automáticamente para acceder al repositorio privado.
+
 ### Opción 2: Instalación Global
 
 Instala el paquete globalmente para usarlo en cualquier lugar:
@@ -209,6 +249,24 @@ sudo npm install -g github:JacuXx/Prompt-Copilot-Shopify
 ```bash
 # Prueba con verbose
 npm install --verbose github:JacuXx/Prompt-Copilot-Shopify
+```
+
+### Error 404 - Repositorio no encontrado
+
+**Causa**: El repositorio es privado y no tienes configurado un token.
+
+**Solución**: Configura un token de GitHub (ver sección "Para repositorios privados" arriba):
+
+```powershell
+# Windows PowerShell
+$env:GITHUB_TOKEN = "ghp_tu_token_aqui"
+npx github:JacuXx/Prompt-Copilot-Shopify
+```
+
+```bash
+# Mac/Linux
+export GITHUB_TOKEN="ghp_tu_token_aqui"
+npx github:JacuXx/Prompt-Copilot-Shopify
 ```
 
 ### Archivos no se sobrescriben

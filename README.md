@@ -216,6 +216,10 @@ npm install -g github:JacuXx/Prompt-Copilot-Shopify
 shopify-copilot-sync
 ```
 
+> **⚠️ IMPORTANTE**: Si el repositorio es privado, necesitas configurar un token de GitHub.
+> 
+> **Ver**: [PRIVATE_REPO_SETUP.md](./PRIVATE_REPO_SETUP.md) para instrucciones detalladas.
+
 Este comando descargará automáticamente todas las guías actualizadas en `./docs/copilot/` de cualquier proyecto donde lo ejecutes.
 
 **Características:**
@@ -225,6 +229,7 @@ Este comando descargará automáticamente todas las guías actualizadas en `./do
 - ✅ Portable y fácil de usar
 
 **Documentación completa:**
+- [PRIVATE_REPO_SETUP.md](./PRIVATE_REPO_SETUP.md) - 🔐 Configuración para repositorio privado
 - [INSTALL.md](./INSTALL.md) - Guía de instalación detallada
 - [EXAMPLES.md](./EXAMPLES.md) - Ejemplos de uso en diferentes escenarios
 - [PUBLISHING.md](./PUBLISHING.md) - Para contribuidores

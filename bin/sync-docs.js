@@ -9,6 +9,10 @@ const REPO_NAME = 'Prompt-Copilot-Shopify';
 const BRANCH = 'main';
 const DOCS_PATH = 'docs/copilot';
 
+// Token de GitHub (opcional, para repos privados)
+// Puedes configurarlo como variable de entorno: GITHUB_TOKEN
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+
 const colors = {
   reset: '\x1b[0m',
   bright: '\x1b[1m',
@@ -46,7 +50,15 @@ function showVersion() {
 
 async function downloadFile(url, destPath) {
   return new Promise((resolve, reject) => {
-    https.get(url, (response) => {
+    const options = {
+      headers: {}
+    };
+    
+    if (GITHUB_TOKEN) {
+      options.headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+    }
+    
+    https.get(url, options, (response) => {
       if (response.statusCode === 302 || response.statusCode === 301) {
         downloadFile(response.headers.location, destPath)
           .then(resolve)
@@ -79,12 +91,16 @@ async function getRepoContents(path) {
   return new Promise((resolve, reject) => {
     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${BRANCH}`;
     
-    https.get(url, {
-      headers: {
-        'User-Agent': 'shopify-copilot-docs-sync',
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    }, (response) => {
+    const headers = {
+      'User-Agent': 'shopify-copilot-docs-sync',
+      'Accept': 'application/vnd.github.v3+json'
+    };
+    
+    if (GITHUB_TOKEN) {
+      headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+    }
+    
+    https.get(url, { headers }, (response) => {
       let data = '';
 
       response.on('data', (chunk) => {
@@ -124,6 +140,10 @@ async function syncDocs(force = false) {
   try {
     log('\n🔄 Sincronizando documentación de Shopify Copilot...', 'cyan');
     log('═══════════════════════════════════════════════════\n', 'cyan');
+    
+    if (GITHUB_TOKEN) {
+      log('🔐 Usando autenticación de GitHub (repo privado)', 'blue');
+    }
 
     const targetDir = path.join(process.cwd(), 'docs', 'copilot');
     
