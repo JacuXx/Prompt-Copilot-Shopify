@@ -30,19 +30,6 @@ npx github:JacuXx/Prompt-Copilot-Shopify --help
 npx github:JacuXx/Prompt-Copilot-Shopify --version
 ```
 
-### ⚠️ Repositorio Privado
-
-Si el repositorio es privado, necesitas configurar un token de GitHub:
-
-```bash
-# Windows (PowerShell)
-.\setup-token.ps1
-
-# Mac/Linux
-./setup-token.sh
-```
-
-**Ver**: [PRIVATE_REPO_SETUP.md](./PRIVATE_REPO_SETUP.md) para más detalles.
 
 ## � Contenido
 
