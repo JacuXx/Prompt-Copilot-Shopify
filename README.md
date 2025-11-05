@@ -201,13 +201,54 @@ shopify theme push --development
 ### Extensiones Útiles
 Todas las extensiones están listadas en `extensions.json` y se instalarán automáticamente.
 
+## 📦 Sincronización Automática de Documentación
+
+¿Quieres usar estas guías en tus proyectos Shopify? ¡Ahora es más fácil!
+
+### Instalación y Uso Rápido
+
+```bash
+# Opción 1: Sin instalar (recomendado)
+npx github:JacuXx/Prompt-Copilot-Shopify
+
+# Opción 2: Instalación global
+npm install -g github:JacuXx/Prompt-Copilot-Shopify
+shopify-copilot-sync
+```
+
+Este comando descargará automáticamente todas las guías actualizadas en `./docs/copilot/` de cualquier proyecto donde lo ejecutes.
+
+**Características:**
+- ✅ Funciona en Windows, Mac y Linux
+- ✅ No requiere dependencias adicionales
+- ✅ Actualización inteligente (no sobrescribe archivos existentes)
+- ✅ Portable y fácil de usar
+
+**Documentación completa:**
+- [INSTALL.md](./INSTALL.md) - Guía de instalación detallada
+- [EXAMPLES.md](./EXAMPLES.md) - Ejemplos de uso en diferentes escenarios
+- [PUBLISHING.md](./PUBLISHING.md) - Para contribuidores
+
+### Automatizar en tu Proyecto
+
+Agrega a tu `package.json`:
+
+```json
+{
+  "scripts": {
+    "postinstall": "npx github:JacuXx/Prompt-Copilot-Shopify",
+    "docs:update": "npx github:JacuXx/Prompt-Copilot-Shopify --force"
+  }
+}
+```
+
 ## 🤝 Contribución
 
 ### Compartir Configuración
 Para usar esta configuración en otros proyectos:
 
-1. Copia la carpeta `.vscode/` a tu nuevo proyecto
-2. Copia la carpeta `docs/` si quieres las guías
+1. Ejecuta `npx github:JacuXx/Prompt-Copilot-Shopify` en tu proyecto
+2. Copia la carpeta `.vscode/` si quieres la configuración de VS Code
 3. Abre el proyecto en VS Code
 4. Instala las extensiones recomendadas
 

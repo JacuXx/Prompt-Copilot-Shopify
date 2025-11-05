@@ -1,0 +1,7 @@
+docs/
+.vscode/
+.git/
+.gitignore
+*.ps1
+README.md
+INSTALL.md

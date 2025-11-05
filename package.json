@@ -1,0 +1,31 @@
+{
+  "name": "@jacuxx/shopify-copilot-docs",
+  "version": "1.0.0",
+  "description": "Descarga automáticamente las guías de GitHub Copilot para desarrollo de Shopify",
+  "main": "bin/sync-docs.js",
+  "bin": {
+    "shopify-copilot-sync": "./bin/sync-docs.js",
+    "scs": "./bin/sync-docs.js"
+  },
+  "scripts": {
+    "test": "node bin/sync-docs.js --help"
+  },
+  "keywords": [
+    "shopify",
+    "copilot",
+    "documentation",
+    "sync",
+    "development"
+  ],
+  "author": "JacuXx",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JacuXx/Prompt-Copilot-Shopify.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
