@@ -2,6 +2,35 @@
 
 ## El repositorio es privado, necesitas un token de GitHub
 
+### 🚀 Método Rápido con Script Automático
+
+Hemos creado scripts que te guían paso a paso:
+
+#### Windows (PowerShell):
+```powershell
+# Descarga y ejecuta el script de configuración
+irm https://raw.githubusercontent.com/JacuXx/Prompt-Copilot-Shopify/main/setup-token.ps1 | iex
+
+# O si ya tienes el repo clonado:
+cd "Prompt Copilot Shopify"
+.\setup-token.ps1
+```
+
+#### Mac/Linux (Bash/Zsh):
+```bash
+# Descarga y ejecuta el script de configuración
+curl -fsSL https://raw.githubusercontent.com/JacuXx/Prompt-Copilot-Shopify/main/setup-token.sh | bash
+
+# O si ya tienes el repo clonado:
+cd Prompt-Copilot-Shopify
+chmod +x setup-token.sh
+./setup-token.sh
+```
+
+---
+
+## 📋 Método Manual
+
 ### Paso 1: Crear Token de GitHub
 
 1. Ve a: https://github.com/settings/tokens
