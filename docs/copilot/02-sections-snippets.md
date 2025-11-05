@@ -7,22 +7,20 @@
 - Un snippet por funcionalidad específica
 - Mantener la modularidad y reutilización
 
-### Estructura de Snippets
+### Estructura de Snippets (SIN COMENTARIOS INNECESARIOS)
 ```liquid
-<!-- snippets/product-card.liquid -->
-{% comment %}
-  Snippet: Product Card
-  Parámetros:
-  - product: objeto producto
-  - show_vendor: mostrar marca (boolean)
-  - card_style: estilo de tarjeta (string)
-{% endcomment %}
+{% liquid
+  assign product_url = product.url | within: collection
+  assign is_on_sale = product.compare_at_price > product.price
+  assign card_style_class = card_style | default: 'standard'
+%}
 
-{% assign product_url = product.url | within: collection %}
-{% assign on_sale = product.compare_at_price > product.price %}
-
-<div class="product-card product-card--{{ card_style | default: 'standard' }}">
-  <!-- Contenido del snippet -->
+<div class="product-card product-card--{{ card_style_class }}">
+  <a href="{{ product_url }}" class="product-card__link">
+    <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}">
+    <h3 class="product-card__title">{{ product.title }}</h3>
+    <p class="product-card__price">{{ product.price | money }}</p>
+  </a>
 </div>
 ```
 
@@ -94,61 +92,124 @@ o !important para sobrescribir.
 - **Snippets**: Archivos modulares para reutilización
 - **Assets**: CSS y JS cuando sea absolutamente necesario
 
-### Archivo de Sección Completo
+### Archivo de Sección Completo (SIN COMENTARIOS)
 ```liquid
-<!-- sections/custom-section.liquid -->
+{% liquid
+  assign items_per_row = section.settings.items_per_row | default: 3
+  assign show_navigation_arrows = section.settings.show_arrows
+  assign section_heading = section.settings.heading
+%}
 
-{% comment %} LIQUID LOGIC {% endcomment %}
-{% assign items_per_row = section.settings.items_per_row | default: 3 %}
-{% assign show_arrows = section.settings.show_arrows %}
-
-{% comment %} HTML STRUCTURE {% endcomment %}
 <section class="custom-section" data-section-id="{{ section.id }}">
-  {% for block in section.blocks %}
-    {% render 'custom-block', block: block %}
-  {% endfor %}
+  {% if section_heading != blank %}
+    <h2 class="custom-section__heading">{{ section_heading }}</h2>
+  {% endif %}
+  
+  <div class="custom-section__grid custom-section__grid--{{ items_per_row }}-columns">
+    {% for block in section.blocks %}
+      {% render 'custom-block', block: block %}
+    {% endfor %}
+  </div>
 </section>
 
-{% comment %} CSS STYLES {% endcomment %}
 <style>
   .custom-section {
-    /* Estilos base */
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   
-  /* Desktop */
+  .custom-section__heading {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .custom-section__grid {
+    display: grid;
+    gap: 20px;
+  }
+  
   @media screen and (min-width: 1024px) {
     .custom-section {
-      /* Estilos desktop */
+      padding: 60px 40px;
+    }
+    
+    .custom-section__grid--3-columns {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   
-  /* Tablet */
   @media screen and (max-width: 1023px) and (min-width: 768px) {
-    .custom-section {
-      /* Estilos tablet */
+    .custom-section__grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
   
-  /* Mobile */
   @media screen and (max-width: 767px) {
-    .custom-section {
-      /* Estilos mobile */
+    .custom-section__grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
 
-{% comment %} JAVASCRIPT (solo si es necesario) {% endcomment %}
 <script>
-  // JavaScript mínimo y optimizado
+  (function() {
+    'use strict';
+    
+    const sectionElement = document.querySelector('[data-section-id="{{ section.id }}"]');
+    
+    function initializeSection() {
+      console.log('Sección inicializada:', '{{ section.id }}');
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeSection);
+    } else {
+      initializeSection();
+    }
+  })();
 </script>
 
-{% comment %} SCHEMA {% endcomment %}
 {% schema %}
 {
   "name": "Sección Personalizada",
-  "settings": [...],
-  "blocks": [...],
-  "presets": [...]
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título de la sección",
+      "default": "Nuestra Colección"
+    },
+    {
+      "type": "range",
+      "id": "items_per_row",
+      "label": "Items por fila",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Mostrar flechas de navegación",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "custom_block",
+      "name": "Bloque personalizado",
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sección Personalizada"
+    }
+  ]
+}
+{% endschema %}
 }
 {% endschema %}
 ```

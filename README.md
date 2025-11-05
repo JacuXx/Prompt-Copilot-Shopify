@@ -1,5 +1,19 @@
 # 🚀 Shopify Development Workspace con GitHub Copilot
 
+## ⛔ REGLA CRÍTICA #1: CÓDIGO SIN COMENTARIOS
+
+**NUNCA agregues comentarios tipo `{% comment %}`, `<!-- -->`, `//` o `/* */` en el código.**
+
+El código debe ser completamente autoexplicativo con:
+- Variables con nombres largos y descriptivos
+- Funciones y snippets con nombres claros
+- Lógica simple dividida en pasos obvios
+- Estructura que se lee como lenguaje natural
+
+**Referencia completa**: Ver `docs/copilot/16-liquid-comments-rules.md`
+
+---
+
 Este workspace está optimizado para el desarrollo de temas de Shopify con GitHub Copilot, incluyendo guías completas, configuración de VS Code y snippets de código.
 
 ## 📋 Configuración Inicial

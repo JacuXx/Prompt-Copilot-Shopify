@@ -17,7 +17,6 @@
 
 2. **Patrones comunes a buscar**:
 ```javascript
-// Buscar estos patrones en el tema
 fetch('/cart/add.js')
 jQuery.post('/cart/add.js')
 $.ajax({ url: '/cart/update.js' })
@@ -31,65 +30,66 @@ $.ajax({ url: '/cart/update.js' })
 
 ### JavaScript Optimizado
 
-#### Estructura Base
+#### Estructura Base (SIN COMENTARIOS)
 ```javascript
 (function() {
   'use strict';
   
   console.log('Inicializando módulo personalizado');
   
-  // Variables y configuración
-  const config = {
+  const moduleConfig = {
     selectors: {
-      button: '[data-custom-button]',
-      container: '[data-custom-container]'
+      customButton: '[data-custom-button]',
+      customContainer: '[data-custom-container]'
     },
-    classes: {
+    cssClasses: {
       loading: 'is-loading',
       error: 'has-error'
     }
   };
   
-  // Funciones principales
-  function initModule() {
+  function initializeCustomModule() {
     console.log('Módulo inicializado');
-    bindEvents();
+    bindModuleEvents();
   }
   
-  function bindEvents() {
-    document.addEventListener('click', handleClick);
+  function bindModuleEvents() {
+    document.addEventListener('click', handleButtonClick);
   }
   
-  function handleClick(event) {
-    const button = event.target.closest(config.selectors.button);
-    if (!button) return;
+  function handleButtonClick(event) {
+    const clickedButton = event.target.closest(moduleConfig.selectors.customButton);
+    if (!clickedButton) return;
     
     event.preventDefault();
-    console.log('Click detectado en:', button);
-    // Lógica del click
+    console.log('Click detectado en:', clickedButton);
+    
+    processButtonAction(clickedButton);
   }
   
-  // Inicialización
+  function processButtonAction(button) {
+    button.classList.add(moduleConfig.cssClasses.loading);
+  }
+  
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initModule);
+    document.addEventListener('DOMContentLoaded', initializeCustomModule);
   } else {
-    initModule();
+    initializeCustomModule();
   }
   
-  // Limpieza de console.log en producción
   if (window.location.hostname !== 'localhost') {
     console.log = function() {};
   }
 })();
 ```
 
-#### AJAX Optimizado
+#### AJAX Optimizado (SIN COMENTARIOS)
 ```javascript
-async function addToCart(variantId, quantity = 1) {
+async function addProductToShoppingCart(variantId, quantity = 1) {
   console.log(`Agregando al carrito: ${variantId}, cantidad: ${quantity}`);
   
   try {
-    const response = await fetch('/cart/add.js', {
+    const cartAddResponse = await fetch('/cart/add.js', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -103,20 +103,19 @@ async function addToCart(variantId, quantity = 1) {
       })
     });
     
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    if (!cartAddResponse.ok) {
+      throw new Error(`HTTP error! status: ${cartAddResponse.status}`);
     }
     
-    const data = await response.json();
-    console.log('Producto agregado exitosamente:', data);
+    const updatedCartData = await cartAddResponse.json();
+    console.log('Producto agregado exitosamente:', updatedCartData);
     
-    // Actualizar UI
-    updateCartUI(data);
+    updateCartUserInterface(updatedCartData);
     
-    return data;
+    return updatedCartData;
   } catch (error) {
     console.error('Error al agregar al carrito:', error);
-    showError('No se pudo agregar el producto al carrito');
+    showErrorMessage('No se pudo agregar el producto al carrito');
     throw error;
   }
 }
@@ -131,12 +130,10 @@ async function addToCart(variantId, quantity = 1) {
 5. **Performance**: Minimizar manipulación del DOM
 6. **Compatibilidad**: Verificar soporte del navegador
 
-### Limpieza de Console.log
+### Limpieza de Console.log en Producción
 ```javascript
-// Al final del archivo, agregar:
 {% unless settings.enable_debug_mode %}
 <script>
-  // Limpiar console.log en producción
   if (typeof console !== 'undefined' && !window.location.hostname.includes('myshopify.com')) {
     ['log', 'debug', 'info', 'warn'].forEach(function(method) {
       console[method] = function() {};
