@@ -81,7 +81,8 @@ async function getRepoContents(path) {
     
     https.get(url, {
       headers: {
-        'User-Agent': 'shopify-copilot-docs-sync'
+        'User-Agent': 'shopify-copilot-docs-sync',
+        'Accept': 'application/vnd.github.v3+json'
       }
     }, (response) => {
       let data = '';
@@ -92,7 +93,25 @@ async function getRepoContents(path) {
 
       response.on('end', () => {
         if (response.statusCode !== 200) {
-          reject(new Error(`Error API GitHub: ${response.statusCode}`));
+          let errorMsg = `Error API GitHub: ${response.statusCode}`;
+          try {
+            const errorData = JSON.parse(data);
+            if (errorData.message) {
+              errorMsg += `\n   Mensaje: ${errorData.message}`;
+            }
+            if (errorData.documentation_url) {
+              errorMsg += `\n   Docs: ${errorData.documentation_url}`;
+            }
+          } catch (e) {
+            // Si no se puede parsear, usar mensaje simple
+          }
+          errorMsg += `\n   URL: ${url}`;
+          errorMsg += `\n\n   💡 Posibles soluciones:`;
+          errorMsg += `\n   1. Verifica que el repositorio existe: https://github.com/${REPO_OWNER}/${REPO_NAME}`;
+          errorMsg += `\n   2. Asegúrate de haber hecho push de la carpeta docs/copilot a GitHub`;
+          errorMsg += `\n   3. Verifica que la rama '${BRANCH}' existe`;
+          errorMsg += `\n   4. Si el repo es privado, necesitas configurar un token de acceso`;
+          reject(new Error(errorMsg));
           return;
         }
         resolve(JSON.parse(data));
