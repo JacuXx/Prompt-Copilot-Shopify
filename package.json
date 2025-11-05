@@ -1,11 +1,11 @@
 {
   "name": "@jacuxx/shopify-copilot-docs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Descarga automáticamente las guías de GitHub Copilot para desarrollo de Shopify",
-  "main": "bin/sync-docs.js",
+  "main": "src/container.js",
   "bin": {
-    "shopify-copilot-sync": "./bin/sync-docs.js",
-    "scs": "./bin/sync-docs.js"
+    "shopify-copilot-sync": "./bin/cli.js",
+    "scs": "./bin/cli.js"
   },
   "scripts": {
     "test": "node bin/sync-docs.js --help"

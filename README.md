@@ -229,10 +229,26 @@ Este comando descargará automáticamente todas las guías actualizadas en `./do
 - ✅ Portable y fácil de usar
 
 **Documentación completa:**
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - 🏗️ **NUEVO v2.0** - Arquitectura limpia y principios SOLID
+- [FOLDER_STRUCTURE.md](./FOLDER_STRUCTURE.md) - 📁 **NUEVO v2.0** - Estructura detallada del proyecto
 - [PRIVATE_REPO_SETUP.md](./PRIVATE_REPO_SETUP.md) - 🔐 Configuración para repositorio privado
 - [INSTALL.md](./INSTALL.md) - Guía de instalación detallada
 - [EXAMPLES.md](./EXAMPLES.md) - Ejemplos de uso en diferentes escenarios
 - [PUBLISHING.md](./PUBLISHING.md) - Para contribuidores
+
+## 🏗️ Arquitectura v2.0
+
+Este proyecto ha sido completamente refactorizado siguiendo:
+
+✅ **Clean Architecture** - Separación clara de capas
+✅ **Principios SOLID** - Código mantenible y extensible
+✅ **Dependency Injection** - Fácil de testear
+✅ **Design Patterns** - Strategy, Command, Singleton
+✅ **Easy to Change** - Modificaciones sin romper código existente
+
+**De 1 archivo monolítico a 16 módulos especializados.**
+
+Ver [ARCHITECTURE.md](./ARCHITECTURE.md) para más detalles.
 
 ### Automatizar en tu Proyecto
 
