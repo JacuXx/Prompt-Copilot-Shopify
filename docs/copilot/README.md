@@ -112,6 +112,21 @@ Esta documentación proporciona guías específicas para que GitHub Copilot gene
     - **Verbos de acción = código, verbos de explicación = documentación**
     - **Principio "Código Primero" para eficiencia**
 
+18. **[18-easy-to-change-principle.md](./18-easy-to-change-principle.md)**
+    - **Principio "Easy to Change"**
+    - **❌ NUNCA hardcodear textos, imágenes o colores**
+    - **✅ Todo debe ser editable desde Theme Customizer**
+    - **Tipos de settings para diferentes contenidos**
+    - **Checklist de validación completa**
+
+19. **[19-dry-principle.md](./19-dry-principle.md)**
+    - 🆕 **Principio DRY: Don't Repeat Yourself**
+    - **❌ NUNCA duplicar código, lógica o estilos**
+    - **✅ Crear componentes reutilizables**
+    - **Regla del Tres: 3 repeticiones = crear snippet**
+    - **Estrategias de refactorización y biblioteca de snippets**
+    - **Evitar duplicación accidental**
+
 ## 🎯 Objetivos Principales
 
 ### Prioridades de Desarrollo
