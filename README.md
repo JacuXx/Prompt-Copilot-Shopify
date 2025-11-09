@@ -17,7 +17,7 @@ shopify-copilot-sync
 
 Esto descargará la carpeta `docs/copilot/` con todas las guías en tu proyecto actual.
 
-### Opciones disponibles
+### Opciones disponible
 
 ```bash
 # Forzar actualización (sobrescribe archivos existentes)
